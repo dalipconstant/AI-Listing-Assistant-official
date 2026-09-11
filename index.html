@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Listing Assistant — Meesho, Flipkart & Amazon Listings from Photos</title>
+  <meta name="description" content="AI Listing Assistant helps Indian sellers fill Meesho, Flipkart and Amazon listings from product photos. Your API key, your review, better titles and descriptions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0614;
+      --bg2: #140a22;
+      --card: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.12);
+      --text: #f4f0ff;
+      --muted: #b7a8d9;
+      --pink: #ff4ecd;
+      --violet: #8b5cf6;
+      --purple: #a78bfa;
+      --glow: rgba(139, 92, 246, 0.45);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(139, 92, 246, 0.35), transparent),
+                  radial-gradient(900px 500px at 90% 10%, rgba(255, 78, 205, 0.2), transparent),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: var(--purple); text-decoration: none; }
+    a:hover { color: var(--pink); }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap; margin-bottom: 40px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.15rem;
+    }
+    .logo {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--violet), var(--pink));
+      display: grid; place-items: center; font-size: 1.2rem;
+      box-shadow: 0 0 24px var(--glow);
+    }
+    nav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.92rem; }
+    nav a {
+      color: var(--muted); padding: 8px 12px; border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    nav a:hover { border-color: var(--border); color: var(--text); background: var(--card); }
+    .hero {
+      text-align: center; padding: 28px 12px 36px;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.15; font-weight: 800;
+      background: linear-gradient(120deg, #fff, #d8b4fe, #f9a8d4);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      margin-bottom: 14px;
+    }
+    .hero p {
+      color: var(--muted); max-width: 620px; margin: 0 auto 22px; font-size: 1.05rem;
+    }
+    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 20px; border-radius: 12px; font-weight: 600; font-size: 0.95rem;
+      border: 1px solid var(--border); color: var(--text); background: var(--card);
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    }
+    .btn:hover { transform: translateY(-1px); border-color: var(--purple); box-shadow: 0 8px 28px var(--glow); color: #fff; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--violet), var(--pink));
+      border: none; color: #fff;
+    }
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px; margin: 36px 0;
+    }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 18px; padding: 20px 18px;
+      backdrop-filter: blur(10px);
+    }
+    .card h3 { font-size: 1.05rem; margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: 0.92rem; }
+    .section { margin: 42px 0; }
+    .section h2 {
+      font-size: 1.35rem; margin-bottom: 14px;
+      border-left: 3px solid var(--pink); padding-left: 12px;
+    }
+    ol, ul { padding-left: 1.2rem; color: var(--muted); }
+    li { margin: 8px 0; }
+    .steps li strong { color: var(--text); }
+    .note {
+      margin-top: 16px; padding: 14px 16px; border-radius: 12px;
+      background: rgba(139, 92, 246, 0.12); border: 1px solid rgba(139, 92, 246, 0.35);
+      color: var(--muted); font-size: 0.9rem;
+    }
+    footer {
+      margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--border);
+      display: flex; flex-wrap: wrap; gap: 12px 20px; justify-content: space-between;
+      color: var(--muted); font-size: 0.88rem;
+    }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--pink); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">✦</div>
+        <span>AI Listing Assistant</span>
+      </div>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#setup">Setup</a>
+        <a href="#use">How to use</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="mailto:supportailistingassistant@gmail.com?subject=AI%20Listing%20Assistant%20Support">Support</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Fill Meesho &amp; Flipkart listings from product photos</h1>
+      <p>
+        AI-powered listing helper for Indian sellers. Generate titles, descriptions and features
+        from your product images — in your voice, under your review. Use your own API key.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://chrome.google.com/webstore" target="_blank" rel="noopener">Get the extension</a>
+        <a class="btn" href="#setup">Setup API key</a>
+        <a class="btn" href="mailto:supportailistingassistant@gmail.com?subject=AI%20Listing%20Assistant%20Support">Contact support</a>
+      </div>
+    </section>
+
+    <section class="grid" id="features">
+      <div class="card">
+        <h3>Image → listing</h3>
+        <p>Detects product photos on seller pages and drafts title, description, keywords and features with AI.</p>
+      </div>
+      <div class="card">
+        <h3>Meesho, Flipkart, Amazon</h3>
+        <p>Marketplace-aware copy. Flipkart titles stay under 80 characters without stuffed specs in the title.</p>
+      </div>
+      <div class="card">
+        <h3>Competitor research</h3>
+        <p>Paste competitor links. AI researches them first, then writes stronger competing content for your product.</p>
+      </div>
+      <div class="card">
+        <h3>Your API key</h3>
+        <p>Gemini (free tier), OpenAI, Claude or Grok. No shared keys. You control cost and privacy.</p>
+      </div>
+      <div class="card">
+        <h3>Seller tones</h3>
+        <p>Balanced, Generic, Reseller, Premium or Max search — match how you want the listing to sound.</p>
+      </div>
+      <div class="card">
+        <h3>You stay in control</h3>
+        <p>Review every field before autofill. Edit anything. Nothing is submitted to the marketplace for you.</p>
+      </div>
+    </section>
+
+    <section class="section" id="setup">
+      <h2>Setup — API key (once)</h2>
+      <ol class="steps">
+        <li><strong>Install</strong> AI Listing Assistant from the Chrome Web Store and pin it.</li>
+        <li>Open the extension → <strong>Settings</strong> (gear icon).</li>
+        <li>Choose engine (Gemini recommended for free) and paste your API key.</li>
+        <li>Click <strong>Test connection</strong> and wait for the green tick.</li>
+        <li>Optional: use <strong>Get free Gemini API key</strong> → opens Google AI Studio → create key → paste back.</li>
+      </ol>
+      <div class="note">
+        Free Gemini key: <a href="https://aistudio.google.com/api-keys" target="_blank" rel="noopener">aistudio.google.com/api-keys</a>
+      </div>
+    </section>
+
+    <section class="section" id="use">
+      <h2>How to use</h2>
+      <ol class="steps">
+        <li>Open a product edit page on <strong>Meesho Supplier</strong> or <strong>Flipkart Seller Hub</strong> (with product images uploaded).</li>
+        <li>Click the extension icon.</li>
+        <li>(Optional) Add competitor product links and choose a seller tone.</li>
+        <li>Click <strong>AI Listing</strong> / Start and wait for the result.</li>
+        <li>Review title, description and other fields. Edit if needed.</li>
+        <li>Click <strong>Autofill</strong> — fields fill step by step. Submit the listing yourself on the marketplace.</li>
+      </ol>
+      <div class="note">
+        Always double-check AI text before publishing. We do not guarantee ranking or order increases.
+        Content is AI-assisted and may need human review.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Support</h2>
+      <p style="color: var(--muted);">
+        Email:
+        <a href="mailto:supportailistingassistant@gmail.com?subject=AI%20Listing%20Assistant%20Support">
+          supportailistingassistant@gmail.com
+        </a>
+        <br />
+        Commercial:
+        <a href="mailto:officialailistingassistant@gmail.com">
+          officialailistingassistant@gmail.com
+        </a>
+      </p>
+    </section>
+
+    <footer>
+      <div>© AI Listing Assistant</div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="https://github.com/dalipconstant/AI-Listing-Assistant" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
